@@ -1,4 +1,4 @@
-    ![1715093210444](image/README/1715093210444.png)
+                                      ![1715093210444](Streamlit\Document\logo.png)
 
     Streamlit is an open-source Python library that simplifies the process of creating web applications for machine learning and data science projects. It allows developers to create interactive and customizable web apps directly from Python scripts, without needing to know HTML, CSS, or JavaScript.
 
