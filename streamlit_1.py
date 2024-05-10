@@ -1,5 +1,4 @@
 import pandas as pd
-import pickle as pickel
 import streamlit as st
 import numpy as np
 import plotly.graph_objects as go
@@ -48,11 +47,12 @@ def add_sidebar():
 
 # NOTE : we use random value generating, changing an single value in any slider, it reflects to all sliders
         random_value = np.random.uniform(5, 100)
+        min_value = np.random.uniform(1,100)
         max_value = np.random.uniform(79, 265)
 
         input_dict[key] = st.sidebar.slider(
             label,
-            min_value=float(0),
+            min_value=float(min_value),
             max_value=float(max_value),
             value = float(random_value)
         )
@@ -107,12 +107,20 @@ def add_radar_chart(input_data):
       polar=dict(
         radialaxis=dict(
           visible=True,
-          range=[0, 1]
+          range=[0, 100]
         )),
       showlegend=False
     )
 
     return fig
+
+
+def add_prediction(input_data):
+    mean = round(sum(input_data.values()) / len(input_data), 2)
+    input_array = np.array(list(input_data.values())).reshape(1, -1)
+
+    return mean, input_array
+
 
 
 def main():
@@ -127,6 +135,7 @@ def main():
         }
     )
     input_data = add_sidebar()
+    # st.write(input_data)
 
     with st.container():
         st.title('Breast Cancer Predictor')
@@ -138,7 +147,22 @@ def main():
         radar_chart = add_radar_chart(input_data)
         st.plotly_chart(radar_chart)
     with col2:
-        st.write('column2')
+        prediction, input_array = add_prediction(input_data)
+
+        st.markdown (''' **:red[Input Data]** ''')
+        st.write(input_array)
+
+        st.markdown("**:red[Prediction] - Mean Value**")
+        button = st.button("Predict")
+        if button:
+            st.write(prediction)
+
+        st.markdown("**:red[Image View]**")
+        button = st.button("Image")
+        if button:
+            st.image("Images\download.jpeg")
+        
+        st.button('Reset', type='primary')
 
 if __name__ == '__main__':
     main()
