@@ -6,3 +6,11 @@
 2. **st.containers  -** way to organize and structure the layout of your app, You can use different types of containers such as `st.sidebar`, `st.container`, `st.expander`, etc.,
 3. **st.columns -** to create multiple columns in your app layout, with custom size.
 4. **streamlit inputs -** `https://docs.streamlit.io/develop/api-reference/widgets`
+
+
+
+```
+streamlit run streamlit_1.py
+```
+
+![1715308444137](image/README/1715308444137.png)
